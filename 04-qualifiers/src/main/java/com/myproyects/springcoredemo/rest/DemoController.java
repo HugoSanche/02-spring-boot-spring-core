@@ -1,7 +1,7 @@
 package com.myproyects.springcoredemo.rest;
 
 import com.myproyects.springcoredemo.common.Coach;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,14 +19,12 @@ public class DemoController {//constructor injection
     //define private field for the dependency
     private Coach myCoach;
 
-    //define a setter injection dependencies
-    @Autowired
-  public void setCoach(Coach thecoach){
+    //Nota.- @Qualifier("tennisCoach" first letter ins lowercase for the class TennisCoach
+  public DemoController(@Qualifier("tennisCoach") Coach thecoach){
         myCoach=thecoach;
     }
     @GetMapping("/dailyworkout")
     public String getDailyWorkout(){
         return myCoach.getDailyWorkout();
     }
-
 }
